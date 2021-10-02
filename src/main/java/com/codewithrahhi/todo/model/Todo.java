@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "todo")
 @Entity
@@ -37,6 +38,11 @@ public class Todo {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @OneToMany(orphanRemoval = true, mappedBy = "todo", cascade = CascadeType.ALL)
+    private List<TodoItem> todoItems;
+
+    
 
     @PrePersist
     public void prePersist() {
