@@ -1,15 +1,13 @@
 package com.codewithrahhi.todo.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Table(name = "category")
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter@Setter
 @Builder
 public class Category {

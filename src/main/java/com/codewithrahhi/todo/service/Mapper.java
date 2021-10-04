@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +41,9 @@ public class Mapper {
         return todoDTO;
     }
 
-    public List<TodoItemDTO> mapToTodoItemDTOList(List<TodoItem> todoItems){
-       return todoItems
+    public List<TodoItemDTO> mapToTodoItemDTOList(List<TodoItem> todoItems) {
+        if (todoItems == null) return Collections.emptyList();
+        return todoItems
                 .stream()
                 .map(this::mapToTodoItemDTO)
                 .collect(Collectors.toList());
@@ -49,5 +51,13 @@ public class Mapper {
 
     public TodoItemDTO mapToTodoItemDTO(TodoItem todoItem) {
         return modelMapper.map(todoItem, TodoItemDTO.class);
+    }
+
+    public TodoItem mapToTodoItem(TodoItemDTO todoItemDTO) {
+        return modelMapper.map(todoItemDTO, TodoItem.class);
+    }
+
+    public Todo mapToTodo(TodoDTO todoDTO) {
+        return modelMapper.map(todoDTO, Todo.class);
     }
 }

@@ -32,17 +32,15 @@ public class Todo {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "due_at", nullable = false)
+    @Column(name = "due_at")
     private LocalDateTime dueAt;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "todo", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, mappedBy = "todo")
     private List<TodoItem> todoItems;
-
-    
 
     @PrePersist
     public void prePersist() {
